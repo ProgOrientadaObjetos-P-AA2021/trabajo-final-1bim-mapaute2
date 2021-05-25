@@ -9,6 +9,35 @@ package paquetedos;
  *
  * @author reroes
  */
-public class Propietario {
+public class Propietario{
+  
+    private String nombre;
+    private String apellido;
+    private String identificacion;
+
+    public Propietario(String nom,String ape, String ide){
+        nombre = nom;
+        apellido = ape;
+        identificacion = ide;
+    }
     
+    public void establecerNombre(String tipo){
+        nombre = tipo;
+    }
+    public void establecerApellido(String tipo){
+        apellido = tipo;
+    }
+    public void establecerIdentificacion(String tipo){
+        identificacion = tipo;
+    }
+    
+    public String obtenerNombre(){
+        return nombre ;
+    }
+    public String obtenerApellido(){
+        return apellido;
+    }
+    public String obtenerIdentificacion(){
+        return identificacion;
+    }
 }

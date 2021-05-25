@@ -10,5 +10,5 @@ package paqueteseis;
  * @author reroes
  */
 public class Casa {
-    
+   
 }
