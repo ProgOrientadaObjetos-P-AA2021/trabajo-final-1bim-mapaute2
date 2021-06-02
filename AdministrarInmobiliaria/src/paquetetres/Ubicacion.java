@@ -16,10 +16,6 @@ public class Ubicacion implements Serializable {
     private String referencia;
     private String casa;
     
-    public Ubicacion(String nomBa, String refe){
-        nomBarrio = nomBa;
-        referencia = refe;
-    }
     public Ubicacion(String numCasa,String nom, String refe){
         casa = numCasa;
         nomBarrio = nom;

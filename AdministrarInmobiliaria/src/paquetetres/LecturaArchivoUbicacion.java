@@ -80,9 +80,11 @@ public class LecturaArchivoUbicacion {
         String cadena = "Lista de Ubicacion\n";
         for (int i = 0; i < obtenerUbicaciones().size(); i++) {
             Ubicacion u = obtenerUbicaciones().get(i);
-            cadena = String.format("%s(%d) Nombres del barrio:%s\n"
+            cadena = String.format("%s(%d) Número de casa: %s\n"
+                    + "Nombres del barrio: %s\n"
                     + "Referencia: %s\n", cadena,
-                    i + 1,u.obtenerNomBarrio(),u.obtenerReferencia());
+                    i + 1,u.obtenerCasa(),
+                    u.obtenerNomBarrio(),u.obtenerReferencia());
         }
 
         return cadena;

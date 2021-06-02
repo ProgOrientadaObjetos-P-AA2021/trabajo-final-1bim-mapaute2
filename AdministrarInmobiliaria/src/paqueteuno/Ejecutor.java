@@ -54,6 +54,7 @@ public class Ejecutor {
                     if(op==1){
                         System.out.println("Ingrese el número de casas a ingresar:");
                         n = leer.nextInt();
+                        leer.nextLine();
                         System.out.println("**DATOS DE LAS CASAS**");
 
                         propietario = new Propietario[n];
@@ -87,7 +88,6 @@ public class Ejecutor {
                             LecturaArchivoPropietario lectura = new LecturaArchivoPropietario
                             (nombreArchivo);
                             lectura.establecerPropietarios();
-                            System.out.println(lectura);
                        }
 
                         //**********
@@ -114,13 +114,11 @@ public class Ejecutor {
 
                             archivo1.establecerRegistroCiudad(ci);
                             archivo1.establecerSalida();
-                        }
-
+                            
                             LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad
                             (nombreArchivo1);
                             lectura1.establecerCiudades();
-                            System.out.println(lectura1);
-
+                        }
                         //**********
                         ubi = new Ubicacion[n];
 
@@ -130,6 +128,9 @@ public class Ejecutor {
                                 EscribirArchivoUbicacion(nombreArchivo2);
 
                         for (int i = 0; i < n; i++) {
+                            System.out.printf("Ingrese el número de casa %d\n", 
+                                        i+1);
+                                numCasa = leer.nextLine();
                             System.out.printf("Ingrese el nombre del barrio %d\n", 
                                     i+1);
                             nomBa = leer.nextLine();
@@ -137,7 +138,7 @@ public class Ejecutor {
                             refe = leer.nextLine();
                             leer.nextLine();
 
-                            Ubicacion u = new Ubicacion(nomBa,refe);
+                            Ubicacion u = new Ubicacion(numCasa,nomBa,refe);
 
                             ubi[i] = u;
 
@@ -149,7 +150,6 @@ public class Ejecutor {
                             LecturaArchivoUbicacion lectura2 = new 
                                 LecturaArchivoUbicacion (nombreArchivo2);
                             lectura2.establecerUbicaciones();
-                            System.out.println(lectura2);
                         }
                         //**********
                         cons = new Constructora[n];
@@ -180,7 +180,7 @@ public class Ejecutor {
                             LecturaArchivoConstructora lectura3 = new LecturaArchivoConstructora
                             (nombreArchivo3);
                             lectura3.establecerConstructoras();
-                            System.out.println(lectura3);
+                            
                             String nombreArchivo4 = "casas.txt";
 
                             EscrituraArchivoCasa archivo4 = new EscrituraArchivoCasa 
@@ -188,8 +188,8 @@ public class Ejecutor {
 
                             Casa casa = new Casa(propietario,ubi,ciudad,cons);
                             
+                            casa.establecerCostoFinal();
                             casa.obtenerCostoFinal();      
-                            casa.obtenerCostoFinal();
 
                             archivo4.establecerRegistroCasa(casa);
                             archivo4.establecerSalida();
@@ -204,6 +204,7 @@ public class Ejecutor {
                             
                             System.out.println("Ingrese el número de departamentos a ingresar:");
                             m = leer.nextInt();
+                            leer.nextLine();
                             System.out.println("**DATOS DE LOS DEPARTAMENTOS**");
 
                             propietario = new Propietario[m];
@@ -237,7 +238,6 @@ public class Ejecutor {
                                 LecturaArchivoPropietario lectura = new LecturaArchivoPropietario
                                 (nombreArchivo);
                                 lectura.establecerPropietarios();
-                                System.out.println(lectura);
                            }
 
                             //**********
@@ -264,12 +264,12 @@ public class Ejecutor {
 
                                 archivo1.establecerRegistroCiudad(ci);
                                 archivo1.establecerSalida();
+                                
+                                LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad
+                                (nombreArchivo1);
+                                lectura1.establecerCiudades();
                             }
 
-                            LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad
-                            (nombreArchivo1);
-                            lectura1.establecerCiudades();
-                            System.out.println(lectura1);
 
                             //**********
                             ubi = new Ubicacion[m];
@@ -280,7 +280,7 @@ public class Ejecutor {
                                     EscribirArchivoUbicacion(nombreArchivo2);
 
                             for (int i = 0; i < m; i++) {//ojo
-                                System.out.printf("Ingrese el nombre del barrio %d\n", 
+                                System.out.printf("Ingrese el número de casa %d\n", 
                                         i+1);
                                 numCasa = leer.nextLine();
                                 System.out.printf("Ingrese el nombre del barrio %d\n", 
@@ -302,7 +302,6 @@ public class Ejecutor {
                                 LecturaArchivoUbicacion lectura2 = new 
                                     LecturaArchivoUbicacion (nombreArchivo2);
                                 lectura2.establecerUbicaciones();
-                                System.out.println(lectura2);
                             }
                             //**********
                             cons = new Constructora[m];
@@ -333,8 +332,20 @@ public class Ejecutor {
                                 LecturaArchivoConstructora lectura3 = new LecturaArchivoConstructora
                             (nombreArchivo3);
                                 lectura3.establecerConstructoras();
-                                System.out.println(lectura3);
 
+                            }
+                            String [] nomEdificio = new String[m];
+                            
+                            for (int i = 0; i <m; i++) {
+                                System.out.printf("Ingrese el nombre del edificio %d\n", i+1);
+                                    nomEdificio[i] = leer.nextLine();
+                            }   
+                            String [] UbiDeparEdi = new String[m];
+                            
+                            for (int i = 0; i < m; i++) {
+                                System.out.printf("Ingrese la ubicación del "
+                                        + "departamento en el edificio %d\n", i+1);
+                                UbiDeparEdi[i] = leer.nextLine();
                             }
                         
                             String nombreArchivo5 = "departamentos.txt";
@@ -342,12 +353,11 @@ public class Ejecutor {
                             EscrituraArchivoDepartamento archivo5 = new EscrituraArchivoDepartamento 
                             (nombreArchivo5);
 
-                            Departamento depa = new Departamento(propietario,ubi,ciudad,cons,m);
-                            
-                            depa.establecerNomEdificio();
-                            depa.establecerUbiDeparEdi();
-                            
+                            Departamento depa = new Departamento(propietario,ubi,ciudad,cons,nomEdificio,UbiDeparEdi);
+     
+                            depa.establecerCosFinal();
                             depa.obtenerCosFinal();
+  
 
                             archivo5.establecerRegistroDepartamento(depa);
                             archivo5.establecerSalida();

@@ -25,16 +25,16 @@ public class Departamento implements Serializable {
     private double precioDepa;
     private Ubicacion[] ubiDepar;
     private Ciudad[] ciuDepa;
-    private String nomEdificio;
-    private String UbiDeparEdi;
+    private String[] nomEdificio;
+    private String[] UbiDeparEdi;
     private Constructora[] consDepa;
-    private int max;
+
     
     Scanner leer = new Scanner(System.in);
     
     public Departamento (Propietario[] pD,
             Ubicacion[] uD,Ciudad[] ciuD,
-            Constructora[] cD,int m){
+            Constructora[] cD, String[] nom,String[] ubiD){
         
         poDepar = pD;
         precioMetroCua = 10.15;
@@ -44,7 +44,8 @@ public class Departamento implements Serializable {
         ubiDepar = uD;
         ciuDepa = ciuD;
         consDepa = cD;
-        max = m;
+        nomEdificio = nom;
+        UbiDeparEdi = ubiD;
     }
     
     public void establecerPoDepar(Propietario[] tipo){
@@ -71,18 +72,11 @@ public class Departamento implements Serializable {
     public void establecerCiuDepa(Ciudad[] tipo){
         ciuDepa = tipo;
     }
-    public void establecerNomEdificio(){
-        for (int i = 0; i <max; i++) {
-            System.out.printf("Ingrese el nombre del edificio %d\n", i+1);
-            String nombreEdificio = leer.nextLine();
-        }
+    public void establecerNomEdificio(String[] tipo){
+        nomEdificio = tipo;
     }
-    public void establecerUbiDeparEdi(){
-        for (int i = 0; i < max; i++) {
-            System.out.printf("Ingrese la ubicación del "
-                    + "departamento en el edificio %d\n", i+1);
-            String ubiEdicio = leer.nextLine();
-        }
+    public void establecerUbiDeparEdi(String[] tipo){
+        UbiDeparEdi = tipo;
     }   
     public void establecerConsDepa(Constructora[] tipo){
         consDepa = tipo;
@@ -113,10 +107,10 @@ public class Departamento implements Serializable {
     public Ciudad[] obtenerCiuDepa(){
         return ciuDepa ;
     }
-    public String obtenerNomEdificio(){
+    public String[] obtenerNomEdificio(){
         return nomEdificio;
     }
-    public String obtenerUbiDeparEdi(){
+    public String[] obtenerUbiDeparEdi(){
         return UbiDeparEdi;
     }
     public Constructora[] obtenerCons(){
@@ -128,7 +122,7 @@ public class Departamento implements Serializable {
         String cadena = "Datos de los Departamentos\n";
         
         for (int i = 0; i < obtenerPoDepar().length; i++) {
-            cadena = String.format("%s\t\t%s - %s - %s\n", cadena, 
+            cadena = String.format("%sNombre: %s\nApellido: %s\nIdentificación: %s\n", cadena, 
                   obtenerPoDepar()[i].obtenerNombre(),
                   obtenerPoDepar()[i].obtenerApellido(),
                   obtenerPoDepar()[i].obtenerIdentificacion());
@@ -137,14 +131,19 @@ public class Departamento implements Serializable {
                 obtenerPrecioMetroCua());
         cadena = String.format("%sEl número de metros cuadrados es:%.2f\n", cadena, 
                 obtenerNumMetrosCua());
-        cadena = String.format("%El valor alícuota mensual es:%.2f\n", cadena, 
+        cadena = String.format("%sEl valor alícuota mensual es: %.2f\n", cadena, 
                 obtenerValorMensual());
-        cadena = String.format("%El precio es:%.2f\n", cadena, 
+        cadena = String.format("%sEl precio es:%.2f\n", cadena, 
                 obtenerPrecioDepa());
-        cadena = String.format("%El nombre del edificio es:%.2f\n", cadena, 
-                obtenerNomEdificio());
-        cadena = String.format("%Ubicación del departamento en edificio es:%.2f\n", cadena, 
-                obtenerUbiDeparEdi());
+        
+        for (int i = 0; i < obtenerNomEdificio().length; i++) {
+            cadena = String.format("%sNombre del edificio es: %s\n", cadena, 
+                  obtenerNomEdificio()[i]);
+        }
+        for (int i = 0; i < obtenerUbiDeparEdi().length; i++) {
+            cadena = String.format("%sUbicación del departamento es: %s\n", cadena, 
+                  obtenerUbiDeparEdi()[i]);
+        }
         
         for (int i = 0; i < obtenerUbiDepar().length; i++) {
             cadena = String.format("%sEl número de casa es: %s\n"
@@ -155,7 +154,7 @@ public class Departamento implements Serializable {
                 obtenerUbiDepar()[i].obtenerReferencia());
         }
         for (int i = 0; i < obtenerCiuDepa().length; i++) {
-            cadena = String.format("%sEl nombre de la ciudad es:%s\n"
+            cadena = String.format("%sEl nombre de la ciudad es: %s\n"
                     + "El nombre de la provincia es: %s\n", cadena, 
                 obtenerCiuDepa()[i].obtenerNomCiudad(),
                 obtenerCiuDepa()[i].obtenerNomProvincia());
@@ -166,7 +165,7 @@ public class Departamento implements Serializable {
                 obtenerCons()[i].obtenerNomConstructora(),
                 obtenerCons()[i].obtenerIdeEmpresa());
         }
-        cadena = String.format("%sEl costo final de la casa es:%.2f\n", cadena, 
+        cadena = String.format("%sEl costo final del departamento es:%.2f\n", cadena, 
                 obtenerCosFinal());
         return cadena;
     } 

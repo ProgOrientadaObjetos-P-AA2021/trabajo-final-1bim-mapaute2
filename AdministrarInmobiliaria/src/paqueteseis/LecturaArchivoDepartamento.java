@@ -40,6 +40,7 @@ public class LecturaArchivoDepartamento {
     public void establecerNombreArchivo(String n) {
         nombreArchivo = n;
     }
+    
 
     public void establecerDepartamentos() {
         // 
@@ -74,7 +75,7 @@ public class LecturaArchivoDepartamento {
     public String obtenerNombreArchivo() {
         return nombreArchivo;
     }
-    
+
     // cierra el archivo y termina la aplicación
     public void cerrarArchivo() {
         try // cierra el archivo y sale

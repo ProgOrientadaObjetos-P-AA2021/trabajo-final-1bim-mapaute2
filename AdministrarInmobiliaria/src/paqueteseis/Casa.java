@@ -47,7 +47,6 @@ public class Casa implements Serializable {
     public void establecerCostoFinal(){
         
         costoFinal = numMetros * precimCua; 
-    
     }
     public void establecerUbi(Ubicacion[] tipo){
         ubi = tipo;
@@ -92,7 +91,8 @@ public class Casa implements Serializable {
         String cadena = "Datos de Casas\n";
         
         for (int i = 0; i < obtenerPo().length; i++) {
-            cadena = String.format("%s\t\t%s - %s - %s\n", cadena, 
+            cadena = String.format("%sNombre: %s\nApellido: %s\n"
+                    + "Identificacion: %s\n", cadena, 
                   obtenerPo()[i].obtenerNombre(),
                   obtenerPo()[i].obtenerApellido(),
                   obtenerPo()[i].obtenerIdentificacion());
@@ -101,7 +101,7 @@ public class Casa implements Serializable {
                 obtenerPreciomCua());
         cadena = String.format("%sEl número de metros cuadrados es:%.2f\n", cadena, 
                 obtenerNumMetros());
-        cadena = String.format("%El número de cuartos es:%.2f\n", cadena, 
+        cadena = String.format("%sEl número de cuartos es: %d\n", cadena, 
                 obtenerNumCuartos());
         for (int i = 0; i < obtenerUbi().length; i++) {
             cadena = String.format("%sEl nombre del barrio es:%s\n"
@@ -110,7 +110,7 @@ public class Casa implements Serializable {
                 obtenerUbi()[i].obtenerReferencia());
         }
         for (int i = 0; i < obtenerCiu().length; i++) {
-            cadena = String.format("%sEl nombre de la ciudad es:%s\n"
+            cadena = String.format("%sEl nombre de la ciudad es: %s\n"
                     + "El nombre de la provincia es: %s\n", cadena, 
                 obtenerCiu()[i].obtenerNomCiudad(),
                 obtenerCiu()[i].obtenerNomProvincia());
