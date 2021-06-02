@@ -77,55 +77,6 @@ public class LecturaArchivoCasa {
         return nombreArchivo;
     }
 
-    @Override
-    public String toString(){
-        String cadena = "Datos de Casas\n";
-        for (int i = 0; i < obtenerCasas().size(); i++) {
-            Casa ca = obtenerCasas().get(i);
-            for ( i = 0; i < obtenerCasas().size(); i++) {              
-                cadena = String.format("%s\t\t%s - %s - %s\n", cadena, 
-                      ca.obtenerPo()[i].obtenerNombre(),
-                      ca.obtenerPo()[i].obtenerApellido(),
-                      ca.obtenerPo()[i].obtenerIdentificacion());
-            }
-            cadena = String.format("%sEl precio por el metro cuadrado es:%.2f\n", cadena, 
-                    ca.obtenerPreciomCua());
-
-            for ( i = 0; i < obtenerCasas().size(); i++) {
-                cadena = String.format("%sEl número de metros son: %.2f\n", cadena, 
-                  ca.obtenerNumMetros());
-            }
-            for (i = 0; i <obtenerCasas().size(); i++) {
-                cadena = String.format("%sEl costo final por casa es: %.2f\n", cadena, 
-                    ca.obtenerCostoFinal());
-            }
-            for (i = 0; i < obtenerCasas().size(); i++) {
-                cadena = String.format("%sEl nombre del barrio es:%s\n"
-                        + "La referencia es: %s\n", cadena, 
-                    ca.obtenerUbi()[i].obtenerNomBarrio(),
-                    ca.obtenerUbi()[i].obtenerReferencia());
-            }
-            for (i = 0; i < obtenerCasas().size(); i++) {
-                cadena = String.format("%sEl nombre de la ciudad es:%s\n"
-                        + "El nombre de la provincia es: %s\n", cadena, 
-                    ca.obtenerCiu()[i].obtenerNomCiudad(),
-                    ca.obtenerCiu()[i].obtenerNomProvincia());
-            }
-            for ( i = 0; i < obtenerCasas().size(); i++) {
-                cadena = String.format("%sEl nombre de la constructora es: %s\n"
-                        + "El ide es: %s\n", cadena, 
-                    ca.obtenerCons()[i].obtenerNomConstructora(),
-                    ca.obtenerCons()[i].obtenerIdeEmpresa());
-            }
-            for (i = 0; i < obtenerCasas().size(); i++) {
-                cadena = String.format("%sEl número de cuartos: %s\n",cadena, 
-                    ca.obtenerNumCuartos());
-            }
-        }
-         
-        return cadena;
-    }
-
     // cierra el archivo y termina la aplicación
     public void cerrarArchivo() {
         try // cierra el archivo y sale

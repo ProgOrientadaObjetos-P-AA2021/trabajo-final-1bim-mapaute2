@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package paqueteseis;
+import java.io.Serializable;
 import paquetedos.Propietario;
 import paquetetres.Ubicacion;
 import paquetecuatro.Ciudad;
@@ -12,7 +13,7 @@ import paquetecinco.Constructora;
  *
  * @author reroes
  */
-public class Casa {
+public class Casa implements Serializable {
    
     private Propietario[] po;
     private double precimCua;
@@ -23,14 +24,14 @@ public class Casa {
     private int numCuartos;
     private Constructora[] cons;
     
-    public Casa (Propietario[] p,double pM,double n,Ubicacion[] u,Ciudad[] ci, 
-            int nC,Constructora[] c){
+    public Casa (Propietario[] p,Ubicacion[] u,Ciudad[] ci
+            ,Constructora[] c){
         po = p;
-        precimCua = pM;
-        numMetros = n;
+        precimCua = 8.50;
+        numMetros = 110;
         ubi = u;
         ciu = ci;
-        numCuartos = nC;
+        numCuartos = 5;
         cons = c;
     }
     
@@ -86,6 +87,42 @@ public class Casa {
     public Constructora[] obtenerCons(){
         return cons;
     } 
-    
-    
+    @Override
+    public String toString(){
+        String cadena = "Datos de Casas\n";
+        
+        for (int i = 0; i < obtenerPo().length; i++) {
+            cadena = String.format("%s\t\t%s - %s - %s\n", cadena, 
+                  obtenerPo()[i].obtenerNombre(),
+                  obtenerPo()[i].obtenerApellido(),
+                  obtenerPo()[i].obtenerIdentificacion());
+        }
+        cadena = String.format("%sEl precio por el metro cuadrado es:%.2f\n", cadena, 
+                obtenerPreciomCua());
+        cadena = String.format("%sEl número de metros cuadrados es:%.2f\n", cadena, 
+                obtenerNumMetros());
+        cadena = String.format("%El número de cuartos es:%.2f\n", cadena, 
+                obtenerNumCuartos());
+        for (int i = 0; i < obtenerUbi().length; i++) {
+            cadena = String.format("%sEl nombre del barrio es:%s\n"
+                    + "La referencia es: %s\n", cadena, 
+                obtenerUbi()[i].obtenerNomBarrio(),
+                obtenerUbi()[i].obtenerReferencia());
+        }
+        for (int i = 0; i < obtenerCiu().length; i++) {
+            cadena = String.format("%sEl nombre de la ciudad es:%s\n"
+                    + "El nombre de la provincia es: %s\n", cadena, 
+                obtenerCiu()[i].obtenerNomCiudad(),
+                obtenerCiu()[i].obtenerNomProvincia());
+        }
+        for (int i = 0; i < obtenerCons().length; i++) {
+            cadena = String.format("%sEl nombre de la constructora es: %s\n"
+                    + "El ide es: %s\n", cadena, 
+                obtenerCons()[i].obtenerNomConstructora(),
+                obtenerCons()[i].obtenerIdeEmpresa());
+        }
+        cadena = String.format("%sEl costo final de la casa es:%.2f\n", cadena, 
+                obtenerCostoFinal());
+        return cadena;
+    } 
 }

@@ -74,9 +74,7 @@ public class LecturaArchivoDepartamento {
     public String obtenerNombreArchivo() {
         return nombreArchivo;
     }
-
-   
-
+    
     // cierra el archivo y termina la aplicación
     public void cerrarArchivo() {
         try // cierra el archivo y sale

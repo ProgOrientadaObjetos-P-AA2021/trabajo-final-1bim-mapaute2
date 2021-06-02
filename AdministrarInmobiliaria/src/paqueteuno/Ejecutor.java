@@ -20,6 +20,9 @@ import paquetecuatro.LecturaArchivoCiudad;
 import paqueteseis.EscrituraArchivoCasa;
 import paqueteseis.LecturaArchivoCasa;
 import paqueteseis.Casa;
+import paqueteseis.Departamento;
+import paqueteseis.EscrituraArchivoDepartamento;
+import paqueteseis.LecturaArchivoDepartamento;
 /**
  *
  * @author reroes
@@ -34,171 +37,327 @@ public class Ejecutor {
         Ciudad [] ciudad;
         Ubicacion[] ubi;
         Constructora [] cons;
-        Casa[] cas;
         int opcion;
-        boolean bandera = true;
  
-        String nombre, apellido, iden,nomCiu,nomPo,nomBa,refe,nomCo,ideCon;
+        String nombre,apellido,numCasa,iden,nomCiu,nomPo,nomBa,refe,nomCo,ideCon;
         int n,m; 
         
-        
             System.out.println("Digite la opción: \n"
-                    + "1. Ingresar datos de las casas\n"
-                    + "2. Mostrar los datos de las casas\n");
+                    + "1. Ingresar datos\n"
+                    + "2. Mostrar datos\n");
             opcion = leer.nextInt();
             if(opcion==1){ 
-                    System.out.println("Ingrese el número de casas a ingresar:");
-                    n = leer.nextInt();
-                    System.out.println("**DATOS DE LAS CASAS**");
-                    propietario = new Propietario[n];
+                System.out.println("Digite la opción: \n"
+                    + "1. Ingresar datos casa\n"
+                    + "2. Ingresar datos departamento\n");
+                    int  op= leer.nextInt();
+                    if(op==1){
+                        System.out.println("Ingrese el número de casas a ingresar:");
+                        n = leer.nextInt();
+                        System.out.println("**DATOS DE LAS CASAS**");
 
-                    String nombreArchivo = "propietarios.txt";
+                        propietario = new Propietario[n];
 
-                    EscrituraArchivoPropietario archivo = new EscrituraArchivoPropietario 
-                    (nombreArchivo);
+                        String nombreArchivo = "propietarios.txt";
 
-                    for (int i = 0; i < n; i++) {
-                        System.out.printf("Ingrese los nombres del propietario"
-                                + "%d\n",i+1);
-                        nombre = leer.nextLine();
-                        System.out.printf("Ingrese los apellidos del propietario"
-                                + "%d\n",i+1);
-                        apellido = leer.nextLine();
-                        System.out.printf("Ingrese la identificación del"
-                                + " propietario " + "%d\n",i+1);
-                        iden = leer.nextLine();
-                        leer.nextLine();
-
-                        Propietario po = new Propietario(nombre,apellido,iden);
-
-                        propietario[i] = po;
-
-                        po = propietario[i];
-
-                        archivo.establecerRegistroPropietario(po);
-                        archivo.establecerSalida();
-                       
-                        LecturaArchivoPropietario lectura = new LecturaArchivoPropietario
+                        EscrituraArchivoPropietario archivo = new EscrituraArchivoPropietario 
                         (nombreArchivo);
-                        lectura.establecerPropietarios();
-                        System.out.println(lectura);
-                   }
-            
-                    //**********
-            
-                    ciudad = new Ciudad[n];
 
-                    String nombreArchivo1 = "ciudades.txt";
+                        for (int i = 0; i < n; i++) {
+                            System.out.printf("Ingrese los nombres del propietario"
+                                    + "%d\n",i+1);                       
+                            nombre = leer.nextLine();
+                            System.out.printf("Ingrese los apellidos del propietario"
+                                    + "%d\n",i+1);
+                            apellido = leer.nextLine();
+                            System.out.printf("Ingrese la identificación del"
+                                    + " propietario " + "%d\n",i+1);
+                            iden = leer.nextLine();
+                            leer.nextLine();
 
-                    EscrituraArchivoCiudad archivo1 = new EscrituraArchivoCiudad
-                    (nombreArchivo1);
+                            Propietario po = new Propietario(nombre,apellido,iden);
 
-                    for (int i = 0; i < n; i++) {
-                        System.out.printf("Ingrese la ciudad %d\n", i+1);
-                        nomCiu = leer.nextLine();
-                        System.out.printf("Ingrese la provincia %d\n", i+1);
-                        nomPo = leer.nextLine();
-                        leer.nextLine();
+                            propietario[i] = po;
 
-                        Ciudad ci = new Ciudad(nomCiu,nomPo);
+                            po = propietario[i];
 
-                        ciudad[i] = ci;
+                            archivo.establecerRegistroPropietario(po);
+                            archivo.establecerSalida();
 
-                        ci = ciudad[i];
+                            LecturaArchivoPropietario lectura = new LecturaArchivoPropietario
+                            (nombreArchivo);
+                            lectura.establecerPropietarios();
+                            System.out.println(lectura);
+                       }
 
-                        archivo1.establecerRegistroCiudad(ci);
-                        archivo1.establecerSalida();
-                    }
+                        //**********
 
-                        LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad
-                    (nombreArchivo1);
-                        lectura1.establecerCiudades();
-                        System.out.println(lectura1);
-                    
-                    //**********
-                    ubi = new Ubicacion[n];
+                        ciudad = new Ciudad[n];
 
-                    String nombreArchivo2 = "ubicaciones.txt";
+                        String nombreArchivo1 = "ciudades.txt";
 
-                    EscribirArchivoUbicacion archivo2 = new 
-                            EscribirArchivoUbicacion(nombreArchivo2);
+                        EscrituraArchivoCiudad archivo1 = new EscrituraArchivoCiudad
+                        (nombreArchivo1);
 
-                    for (int i = 0; i < n; i++) {
-                        System.out.printf("Ingrese el nombre del barrio %d\n", 
-                                i+1);
-                        nomBa = leer.nextLine();
-                        System.out.printf("Ingrese la referencia %d\n", i+1);
-                        refe = leer.nextLine();
-                        leer.nextLine();
+                        for (int i = 0; i < n; i++) {
+                            System.out.printf("Ingrese la ciudad %d\n", i+1);
+                            nomCiu = leer.nextLine();
+                            System.out.printf("Ingrese la provincia %d\n", i+1);
+                            nomPo = leer.nextLine();
+                            leer.nextLine();
 
-                        Ubicacion u = new Ubicacion(nomBa,refe);
+                            Ciudad ci = new Ciudad(nomCiu,nomPo);
 
-                        ubi[i] = u;
+                            ciudad[i] = ci;
 
-                        u = ubi[i];
+                            ci = ciudad[i];
 
-                        archivo2.establecerRegistroUbicacion(u);
-                        archivo2.establecerSalida();
+                            archivo1.establecerRegistroCiudad(ci);
+                            archivo1.establecerSalida();
+                        }
 
-                        LecturaArchivoUbicacion lectura2 = new 
-                            LecturaArchivoUbicacion (nombreArchivo2);
-                        lectura2.establecerUbicaciones();
-                        System.out.println(lectura2);
-                    }
-                    //**********
-                    cons = new Constructora[n];
+                            LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad
+                            (nombreArchivo1);
+                            lectura1.establecerCiudades();
+                            System.out.println(lectura1);
 
-                    String nombreArchivo3 = "constructoras.txt";
+                        //**********
+                        ubi = new Ubicacion[n];
 
-                    EscrituraArchivoConstructora archivo3 = new EscrituraArchivoConstructora
-                    (nombreArchivo3);
+                        String nombreArchivo2 = "ubicaciones.txt";
 
-                    for (int i = 0; i < n; i++) {
-                        System.out.printf("Ingrese el nombre de la constructora"
-                                + "%d\n", i+1);
-                        nomCo = leer.nextLine();
-                        System.out.printf("Ingrese el ide de la constructora "
-                                + "%d\n",i+1);
-                        ideCon = leer.nextLine();
-                        leer.nextLine();
+                        EscribirArchivoUbicacion archivo2 = new 
+                                EscribirArchivoUbicacion(nombreArchivo2);
 
-                        Constructora co = new Constructora(nomCo,ideCon);
+                        for (int i = 0; i < n; i++) {
+                            System.out.printf("Ingrese el nombre del barrio %d\n", 
+                                    i+1);
+                            nomBa = leer.nextLine();
+                            System.out.printf("Ingrese la referencia %d\n", i+1);
+                            refe = leer.nextLine();
+                            leer.nextLine();
 
-                        cons[i] = co;
+                            Ubicacion u = new Ubicacion(nomBa,refe);
 
-                        co = cons[i];
+                            ubi[i] = u;
 
-                        archivo3.establecerRegistroConstructora(co);
-                        archivo3.establecerSalida();
+                            u = ubi[i];
 
-                        LecturaArchivoConstructora lectura3 = new LecturaArchivoConstructora
-                    (nombreArchivo3);
-                        lectura3.establecerConstructoras();
-                        System.out.println(lectura3);
+                            archivo2.establecerRegistroUbicacion(u);
+                            archivo2.establecerSalida();
+
+                            LecturaArchivoUbicacion lectura2 = new 
+                                LecturaArchivoUbicacion (nombreArchivo2);
+                            lectura2.establecerUbicaciones();
+                            System.out.println(lectura2);
+                        }
+                        //**********
+                        cons = new Constructora[n];
+
+                        String nombreArchivo3 = "constructoras.txt";
+
+                        EscrituraArchivoConstructora archivo3 = new EscrituraArchivoConstructora
+                        (nombreArchivo3);
+
+                        for (int i = 0; i < n; i++) {
+                            System.out.printf("Ingrese el nombre de la constructora"
+                                    + "%d\n", i+1);
+                            nomCo = leer.nextLine();
+                            System.out.printf("Ingrese el ide de la constructora "
+                                    + "%d\n",i+1);
+                            ideCon = leer.nextLine();
+                            leer.nextLine();
+
+                            Constructora co = new Constructora(nomCo,ideCon);
+
+                            cons[i] = co;
+
+                            co = cons[i];
+
+                            archivo3.establecerRegistroConstructora(co);
+                            archivo3.establecerSalida();
+
+                            LecturaArchivoConstructora lectura3 = new LecturaArchivoConstructora
+                            (nombreArchivo3);
+                            lectura3.establecerConstructoras();
+                            System.out.println(lectura3);
+                            String nombreArchivo4 = "casas.txt";
+
+                            EscrituraArchivoCasa archivo4 = new EscrituraArchivoCasa 
+                            (nombreArchivo4);
+
+                            Casa casa = new Casa(propietario,ubi,ciudad,cons);
+                            
+                            casa.obtenerCostoFinal();      
+                            casa.obtenerCostoFinal();
+
+                            archivo4.establecerRegistroCasa(casa);
+                            archivo4.establecerSalida();
+
+                            LecturaArchivoCasa lectura4 = new LecturaArchivoCasa
+                            (nombreArchivo4);
+                            lectura4.establecerCasas();
+                            System.out.println(casa);                           
+                        }
+                    }else{
+                        if(op==2){
+                            
+                            System.out.println("Ingrese el número de departamentos a ingresar:");
+                            m = leer.nextInt();
+                            System.out.println("**DATOS DE LOS DEPARTAMENTOS**");
+
+                            propietario = new Propietario[m];
+
+                            String nombreArchivo = "propietarios.txt";
+
+                            EscrituraArchivoPropietario archivo = new EscrituraArchivoPropietario 
+                            (nombreArchivo);
+
+                            for (int i = 0; i < m; i++) {
+                                System.out.printf("Ingrese los nombres del propietario"
+                                        + "%d\n",i+1);                       
+                                nombre = leer.nextLine();
+                                System.out.printf("Ingrese los apellidos del propietario"
+                                        + "%d\n",i+1);
+                                apellido = leer.nextLine();
+                                System.out.printf("Ingrese la identificación del"
+                                        + " propietario " + "%d\n",i+1);
+                                iden = leer.nextLine();
+                                leer.nextLine();
+
+                                Propietario po = new Propietario(nombre,apellido,iden);
+
+                                propietario[i] = po;
+
+                                po = propietario[i];
+
+                                archivo.establecerRegistroPropietario(po);
+                                archivo.establecerSalida();
+
+                                LecturaArchivoPropietario lectura = new LecturaArchivoPropietario
+                                (nombreArchivo);
+                                lectura.establecerPropietarios();
+                                System.out.println(lectura);
+                           }
+
+                            //**********
+
+                            ciudad = new Ciudad[m];
+
+                            String nombreArchivo1 = "ciudades.txt";
+
+                            EscrituraArchivoCiudad archivo1 = new EscrituraArchivoCiudad
+                            (nombreArchivo1);
+
+                            for (int i = 0; i < m; i++) {
+                                System.out.printf("Ingrese la ciudad %d\n", i+1);
+                                nomCiu = leer.nextLine();
+                                System.out.printf("Ingrese la provincia %d\n", i+1);
+                                nomPo = leer.nextLine();
+                                leer.nextLine();
+
+                                Ciudad ci = new Ciudad(nomCiu,nomPo);
+
+                                ciudad[i] = ci;
+
+                                ci = ciudad[i];
+
+                                archivo1.establecerRegistroCiudad(ci);
+                                archivo1.establecerSalida();
+                            }
+
+                            LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad
+                            (nombreArchivo1);
+                            lectura1.establecerCiudades();
+                            System.out.println(lectura1);
+
+                            //**********
+                            ubi = new Ubicacion[m];
+
+                            String nombreArchivo2 = "ubicaciones.txt";
+
+                            EscribirArchivoUbicacion archivo2 = new 
+                                    EscribirArchivoUbicacion(nombreArchivo2);
+
+                            for (int i = 0; i < m; i++) {//ojo
+                                System.out.printf("Ingrese el nombre del barrio %d\n", 
+                                        i+1);
+                                numCasa = leer.nextLine();
+                                System.out.printf("Ingrese el nombre del barrio %d\n", 
+                                        i+1);
+                                nomBa = leer.nextLine();
+                                System.out.printf("Ingrese la referencia %d\n", i+1);
+                                refe = leer.nextLine();
+                                leer.nextLine();
+
+                                Ubicacion u = new Ubicacion(numCasa,nomBa,refe);
+
+                                ubi[i] = u;
+
+                                u = ubi[i];
+
+                                archivo2.establecerRegistroUbicacion(u);
+                                archivo2.establecerSalida();
+
+                                LecturaArchivoUbicacion lectura2 = new 
+                                    LecturaArchivoUbicacion (nombreArchivo2);
+                                lectura2.establecerUbicaciones();
+                                System.out.println(lectura2);
+                            }
+                            //**********
+                            cons = new Constructora[m];
+
+                            String nombreArchivo3 = "constructoras.txt";
+
+                            EscrituraArchivoConstructora archivo3 = new EscrituraArchivoConstructora
+                            (nombreArchivo3);
+
+                            for (int i = 0; i < m; i++) {
+                                System.out.printf("Ingrese el nombre de la constructora"
+                                        + "%d\n", i+1);
+                                nomCo = leer.nextLine();
+                                System.out.printf("Ingrese el ide de la constructora "
+                                        + "%d\n",i+1);
+                                ideCon = leer.nextLine();
+                                leer.nextLine();
+
+                                Constructora co = new Constructora(nomCo,ideCon);
+
+                                cons[i] = co;
+
+                                co = cons[i];
+
+                                archivo3.establecerRegistroConstructora(co);
+                                archivo3.establecerSalida();
+
+                                LecturaArchivoConstructora lectura3 = new LecturaArchivoConstructora
+                            (nombreArchivo3);
+                                lectura3.establecerConstructoras();
+                                System.out.println(lectura3);
+
+                            }
                         
-                    }
-                    double metroCua = 110;
-                    int  numCua = 5;
-                    double precio = 8.50;
-                    
-                    
-                    String nombreArchivo4 = "casas.txt";
+                            String nombreArchivo5 = "departamentos.txt";
 
-                    EscrituraArchivoCasa archivo4 = new EscrituraArchivoCasa 
-                    (nombreArchivo4);
-                    
-                    Casa casa = new Casa(propietario,precio,metroCua,ubi,ciudad,numCua,cons);
-                    casa.obtenerCostoFinal();      
-                    casa.obtenerCostoFinal();
-                    
-                    archivo4.establecerRegistroCasa(casa);
-                    archivo4.establecerSalida();
-                    
-                    LecturaArchivoCasa lectura4 = new LecturaArchivoCasa
-                    (nombreArchivo4);
-                    lectura4.establecerCasas();
-                    System.out.println(lectura4);
-                        
+                            EscrituraArchivoDepartamento archivo5 = new EscrituraArchivoDepartamento 
+                            (nombreArchivo5);
+
+                            Departamento depa = new Departamento(propietario,ubi,ciudad,cons,m);
+                            
+                            depa.establecerNomEdificio();
+                            depa.establecerUbiDeparEdi();
+                            
+                            depa.obtenerCosFinal();
+
+                            archivo5.establecerRegistroDepartamento(depa);
+                            archivo5.establecerSalida();
+
+                            LecturaArchivoDepartamento lectura5 = new LecturaArchivoDepartamento
+                            (nombreArchivo5);
+                            lectura5.establecerDepartamentos();
+                            System.out.println(depa);    
+                        }
+                    }
             }else{
                 if(opcion==2){
                     int op = 0;
@@ -215,25 +374,25 @@ public class Ejecutor {
                     if (op == 1){
                         String nombreArchivo = "propietarios.txt";
                         LecturaArchivoPropietario lectura = new LecturaArchivoPropietario(nombreArchivo);
-                        lectura.obtenerPropietarios();
+                        lectura.establecerPropietarios();
                         System.out.println(lectura);
                     }else{
                         if(op == 2){
                             String nombreArchivo2 = "ubicaciones.txt";
                             LecturaArchivoUbicacion lectura2 = new LecturaArchivoUbicacion(nombreArchivo2);
-                            lectura2.obtenerUbicaciones();
+                            lectura2.establecerUbicaciones();
                             System.out.println(lectura2);
                         }else{
                             if(op == 3){
                                String nombreArchivo1 = "ciudades.txt";
                             LecturaArchivoCiudad lectura1 = new LecturaArchivoCiudad(nombreArchivo1);
-                            lectura1.obtenerCiudades();
+                            lectura1.establecerCiudades();
                             System.out.println(lectura1); 
                             }else{
                                 if(op==4){
                                   String nombreArchivo3 = "constructoras.txt";
                                   LecturaArchivoConstructora lectura3 = new LecturaArchivoConstructora(nombreArchivo3);
-                                  lectura3.obtenerConstructoras();
+                                  lectura3.establecerConstructoras();
                                   System.out.println(lectura3); 
                                 }
                             }
@@ -245,121 +404,4 @@ public class Ejecutor {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
